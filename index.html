@@ -475,8 +475,8 @@ footer p { margin: 0; }
   }
   buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-filter")); }); });
     // Open links to other sites in a new tab, and tell screen reader users it will.
-  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
-    if (a.hostname === location.hostname) return;
+  document.querySelectorAll('a[href^="http"], a[href$=".pdf"]').forEach(function (a) {
+    // if (a.hostname === location.hostname) return;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
     var note = document.createElement("span");
