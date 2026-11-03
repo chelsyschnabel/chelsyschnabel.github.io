@@ -58,6 +58,7 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -999px; top: 0; }
 .skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); top: 8px; background: var(--card); padding: 0.4rem 0.8rem; z-index: 5; }
 
@@ -473,6 +474,16 @@ footer p { margin: 0; }
     buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-filter") === f)); });
   }
   buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-filter")); }); });
+    // Open links to other sites in a new tab, and tell screen reader users it will.
+  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    if (a.hostname === location.hostname) return;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    var note = document.createElement("span");
+    note.className = "sr-only";
+    note.textContent = " (opens in a new tab)";
+    a.appendChild(note);
+  });
 })();
 </script>
 </body>
