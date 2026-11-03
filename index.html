@@ -12,14 +12,14 @@
 <style>
 /* Layout: one reading column like a well-kept notebook; work samples set as library catalog cards in a two-up grid. */
 :root {
-  --paper: #eef0ea;      /* sage-tinted page */
-  --card: #f8f8f3;       /* catalog card stock */
-  --ink: #1d2a25;        /* green-black ink */
-  --muted: #55625c;      /* pencil */
-  --rule: #c9cfc4;       /* faint ruled line */
-  --oxblood: #7a2e3a;    /* bookbinding accent */
-  --brass: #8a6d2f;      /* small details only */
-  --chip: #e2e6dd;
+  --paper: #eff1f5;      /* Latte base: page */
+  --card: #f6f7fa;       /* cards, a step lighter than base */
+  --ink: #4c4f69;        /* Latte text */
+  --muted: #5c5f77;      /* Latte subtext1 */
+  --rule: #bcc0cc;       /* Latte surface1 */
+  --accent: #8839ef;    /* Latte mauve: links, focus, Expert */
+  --accent-2: #8839ef;      /* corner labels (Latte lavender is too light for text) */
+  --chip: #ccd0da;       /* Latte surface0 */
   --font-display: "Atkinson Hyperlegible Next", system-ui, "DejaVu Sans", Arial, sans-serif;
   --font-body: "Atkinson Hyperlegible Next", system-ui, "DejaVu Sans", Arial, sans-serif;
   --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, "DejaVu Sans Mono", Menlo, monospace;
@@ -31,14 +31,14 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #131a17; --card: #1a231f; --ink: #e6e3d7; --muted: #a3ada6;
-    --rule: #303c36; --oxblood: #e3a0aa; --brass: #cdae6b; --chip: #24302b;
+    --paper: #1e1e2e; --card: #181825; --ink: #cdd6f4; --muted: #a6adc8;
+    --rule: #45475a; --accent: #cba6f7; --accent-2: #b4befe; --chip: #313244;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #131a17; --card: #1a231f; --ink: #e6e3d7; --muted: #a3ada6;
-  --rule: #303c36; --oxblood: #e3a0aa; --brass: #cdae6b; --chip: #24302b;
+    --paper: #1e1e2e; --card: #181825; --ink: #cdd6f4; --muted: #a6adc8;
+    --rule: #45475a; --accent: #cba6f7; --accent-2: #b4befe; --chip: #313244;
   color-scheme: dark;
 }
 
@@ -54,9 +54,9 @@ body {
 }
 img { max-width: 100%; height: auto; }
 [hidden] { display: none !important; }
-a { color: var(--oxblood); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
 .skip { position: absolute; left: -999px; top: 0; }
 .skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); top: 8px; background: var(--card); padding: 0.4rem 0.8rem; z-index: 5; }
@@ -135,14 +135,14 @@ main section:last-of-type { border-bottom: 0; }
   padding-bottom: 2.2rem;
 }
 .card-top { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
-.callno { font-family: var(--font-mono); font-size: var(--step--1); color: var(--brass); white-space: nowrap; }
+.callno { font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent-2); white-space: nowrap; }
 .card p { margin: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
 .tags li { font-family: var(--font-mono); font-size: 0.75rem; background: var(--chip); color: var(--ink); padding: 0.1rem 0.5rem; border-radius: 3px; }
 .tools { font-size: var(--step--1); color: var(--muted); }
 .card-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: var(--step--1); font-family: var(--font-mono); }
 .card details { border-top: 1px dashed var(--rule); padding-top: 0.6rem; }
-.card summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--step--1); color: var(--oxblood); }
+.card summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent); }
 .card details[open] summary { margin-bottom: 0.6rem; }
 .card details div { display: grid; gap: 0.6rem; font-size: 0.97rem; }
 .card details h4 { margin: 0.3rem 0 0; font-size: 1rem; font-weight: 600; }
@@ -155,7 +155,7 @@ main section:last-of-type { border-bottom: 0; }
 .skills ul { list-style: none; margin: 0; padding: 0; }
 .skills li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.32rem; border-bottom: 1px dotted var(--rule); }
 .skills li span:last-child { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); align-self: center; }
-.skills li.expert span:last-child { color: var(--oxblood); }
+.skills li.expert span:last-child { color: var(--accent); }
 
 /* Experience: a timeline down the margin */
 .jobs { display: grid; gap: 2rem; margin: 0; padding: 0; list-style: none; }
@@ -427,7 +427,7 @@ footer p { margin: 0; }
 </main>
 
 <footer>
-  <div class="wrap"><p>All work samples are my own unless noted. Hand-built in plain HTML and CSS.</p></div>
+  <div class="wrap"><p>All work samples are my own unless noted. Built in plain HTML and CSS and deployed via GitHub.</p></div>
 </footer>
 
 <script>
