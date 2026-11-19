@@ -1,0 +1,304 @@
+/* Chelsy Schnabel portfolio
+   Layout: folder tabs across the top, a hero with a compass-and-straightedge
+   construction and a row of sticky notes, then each section as a folder:
+   a colored tab on top of a graph-paper panel. */
+
+/* ---------- Colors: Catppuccin Latte (light) ---------- */
+:root {
+  --paper: #faf5fa;      /* blush white: page background */
+  --card: #fffbfe;       /* panels and cards */
+  --ink: #4a3d5c;        /* plum: main text */
+  --muted: #6a5b7b;      /* soft plum: dates, labels */
+  --rule: #e3d3e6;       /* soft borders */
+  --grid: rgba(138, 63, 209, 0.16);  /* bullet-journal dots */
+  --accent: #8a3fd1;     /* mauve: links and focus */
+  --title: #9b3f9a;      /* berry: big handwritten headings */
+
+  /* Pastel tab and sticky-note colors (Catppuccin Mocha pastels).
+     They always carry dark text, so they read the same in both themes. */
+  --pink: #f5c2e7; --mauve: #cba6f7; --blue: #89b4fa; --green: #a6e3a1; --peach: #fab387;
+  --teal: #94e2d5; --yellow: #f9e2af; --lavender: #b4befe;
+  --on-pastel: #1e1e2e;
+
+  /* Bars on work samples and jobs (decoration only, never text) */
+  --s1: var(--mauve); --s2: var(--pink); --s3: var(--blue); --s4: var(--teal);
+  --s5: var(--peach); --s6: var(--green); --s7: var(--yellow); --s8: var(--lavender);
+
+  /* ---------- Fonts ---------- */
+  --font-display: "Architects Daughter", "Short Stack", "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible Next", system-ui, "DejaVu Sans", Arial, sans-serif;
+
+  /* ---------- Type scale ---------- */
+  --step--1: 0.84rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.35rem;
+  --step-2: 1.9rem;
+  --step-3: clamp(2.6rem, 7vw, 4.2rem);
+}
+
+/* ---------- Colors: Catppuccin Mocha (dark) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1e1e2e; --card: #181825; --ink: #cdd6f4; --muted: #a6adc8;
+    --rule: #45475a; --grid: rgba(205, 214, 244, 0.12);
+    --accent: #cba6f7; --title: #f5c2e7;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1e1e2e; --card: #181825; --ink: #cdd6f4; --muted: #a6adc8;
+  --rule: #45475a; --grid: rgba(205, 214, 244, 0.12);
+  --accent: #cba6f7; --title: #f5c2e7;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5.5rem; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+img { max-width: 100%; height: auto; }
+[hidden] { display: none !important; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); top: 8px; background: var(--card); padding: 0.4rem 0.8rem; z-index: 20; }
+
+.wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-family: var(--font-display); font-size: var(--step-3); font-weight: 400; color: var(--title); }
+h2 { font-family: var(--font-display); font-size: var(--step-2); font-weight: 400; }
+h3 { font-size: var(--step-1); font-weight: 700; }
+
+/* Dot-grid paper, like a bullet journal, inside each folder */
+.panel {
+  background-color: color-mix(in srgb, var(--tab) 12%, var(--card));
+  background-image: radial-gradient(var(--grid) 1.2px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+/* ---------- Top bar with folder tabs ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--paper);
+}
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--paper);
+  border-bottom: 2px solid var(--mauve);
+}
+.topbar .wrap { display: flex; align-items: flex-end; justify-content: space-between; gap: 0.5rem 1rem; padding-top: 0.7rem; flex-wrap: wrap; }
+.topbar .name { font-family: var(--font-display); font-size: 1.4rem; color: var(--title); text-decoration: none; padding-bottom: 0.5rem; }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0; padding: 0; list-style: none; }
+.tabs a {
+  display: block;
+  font-family: var(--font-display); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--on-pastel); text-decoration: none;
+  padding: 0.35rem 0.9rem 0.25rem;
+  border-radius: 10px 10px 0 0;
+}
+.tabs a:hover { text-decoration: underline; }
+.tabs .t1 { background: var(--pink); }
+.tabs .t2 { background: var(--mauve); }
+.tabs .t3 { background: var(--blue); }
+.tabs .t4 { background: var(--green); }
+.tabs .t5 { background: var(--peach); }
+@media (prefers-reduced-motion: no-preference) {
+  .tabs a { transition: transform 0.15s ease; }
+  .tabs a:hover { transform: translateY(-3px); }
+}
+
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; align-items: center; }
+.hero-text { display: grid; gap: 0.8rem; min-width: 0; }
+.role { font-size: var(--step-1); margin: 0; }
+.contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0.3rem 0 0; padding: 0; list-style: none; font-family: var(--font-body); font-size: var(--step--1); }
+.contact li { min-width: 0; overflow-wrap: anywhere; }
+.contact span { color: var(--muted); margin-right: 0.35rem; }
+
+.construction { margin: 0; display: grid; gap: 0.4rem; justify-items: center; }
+.construction svg { width: 100%; max-width: 360px; height: auto; overflow: visible; }
+.construction .arc, .construction .seg { fill: none; stroke: var(--title); stroke-width: 2; stroke-linecap: round; }
+.construction .arc { stroke-dasharray: 5 6; stroke: var(--muted); }
+.construction .ring { fill: none; stroke: var(--pink); stroke-width: 6; }
+.construction .dot { fill: var(--ink); }
+.construction text { font-family: var(--font-display); font-size: 18px; fill: var(--ink); }
+.construction figcaption { font-family: var(--font-display); font-size: 1rem; color: var(--muted); text-align: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .construction .draw { stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 1.4s ease-out forwards; }
+  .construction .draw.late { animation-delay: 0.5s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .construction .arc.draw { animation-name: draw-dashed; }
+  @keyframes draw-dashed { 0% { stroke-dashoffset: 400; } 99% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; stroke-dasharray: 5 6; } }
+}
+
+/* Sticky notes: what I'm working on now */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin: 2rem 0 0; padding: 0; list-style: none; }
+.note {
+  display: grid; gap: 0.3rem; justify-items: center; text-align: center;
+  padding: 1.1rem 1rem 1.2rem;
+  color: var(--on-pastel);
+  border-radius: 6px 6px 14px 6px;
+  box-shadow: 0 6px 0 -2px rgba(17, 17, 27, 0.18);
+}
+.note-title { font-family: var(--font-display); font-size: 1.7rem; line-height: 1.1; }
+.note-sub { font-size: var(--step--1); text-transform: uppercase; letter-spacing: 0.06em; }
+.n1 { background: var(--mauve); transform: rotate(-1.5deg); }
+.n2 { background: var(--green); transform: rotate(1deg); }
+.n3 { background: var(--lavender); transform: rotate(-0.6deg); }
+@media (prefers-reduced-motion: reduce) { .note { transform: none; } }
+
+/* ---------- Sections as folders ---------- */
+main section { padding-block: 1.25rem 1.5rem; }
+.folder { --tab: var(--pink); }
+.folder.c2 { --tab: var(--mauve); }
+.folder.c3 { --tab: var(--blue); }
+.folder.c4 { --tab: var(--green); }
+.folder.c5 { --tab: var(--peach); }
+
+.tab {
+  display: inline-block;
+  background: var(--tab); color: var(--on-pastel);
+  font-size: 1.5rem;
+  padding: 0.35rem 1.1rem 0.15rem;
+  border-radius: 14px 14px 0 0;
+  position: relative; z-index: 1;
+}
+.panel {
+  border: 2px solid var(--tab);
+  border-radius: 0 18px 18px 18px;
+  padding: clamp(1.1rem, 3vw, 1.75rem);
+}
+.prose { max-width: 40rem; margin: 0; }
+
+.about-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem; }
+.facts { display: grid; gap: 1.1rem; align-content: start; margin: 0; }
+.facts dt { font-family: var(--font-display); font-size: 1.1rem; color: var(--muted); }
+.facts dd { margin: 0.1rem 0 0; }
+
+/* ---------- Work samples ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+.filters button {
+  font: inherit; font-family: var(--font-body); font-size: var(--step--1);
+  background: var(--card); color: var(--ink);
+  border: 2px solid var(--mauve); border-radius: 999px;
+  padding: 0.3rem 0.95rem; cursor: pointer;
+}
+.filters button:hover { background: color-mix(in srgb, var(--mauve) 30%, var(--card)); }
+.filters button[aria-pressed="true"] { background: var(--mauve); color: var(--on-pastel); }
+
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+.card {
+  --stripe: var(--s1);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-top: 8px solid var(--stripe);
+  border-radius: 16px;
+  padding: 1.15rem 1.3rem 1.3rem;
+  box-shadow: 0 4px 14px -8px rgba(74, 61, 92, 0.35);
+  display: grid; gap: 0.7rem; align-content: start;
+  min-width: 0;
+}
+.cards .card:nth-child(8n+2) { --stripe: var(--s2); }
+.cards .card:nth-child(8n+3) { --stripe: var(--s3); }
+.cards .card:nth-child(8n+4) { --stripe: var(--s4); }
+.cards .card:nth-child(8n+5) { --stripe: var(--s5); }
+.cards .card:nth-child(8n+6) { --stripe: var(--s6); }
+.cards .card:nth-child(8n+7) { --stripe: var(--s7); }
+.cards .card:nth-child(8n+8) { --stripe: var(--s8); }
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: transform 0.2s ease; }
+  .card:hover { transform: translateY(-3px); }
+}
+
+.card-top { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+.card h3 { font-size: 1.2rem; font-weight: 700; }
+.callno { font-size: 0.78rem; background: var(--lavender); color: var(--on-pastel); padding: 0.1rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+.card p { margin: 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+.tags li { font-size: 0.78rem; background: color-mix(in srgb, var(--pink) 45%, var(--card)); color: var(--ink); padding: 0.1rem 0.6rem; border-radius: 999px; }
+.tools { font-size: var(--step--1); color: var(--muted); }
+.card-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.95rem; font-weight: 700; }
+.card details { border-top: 1px dashed var(--rule); padding-top: 0.6rem; }
+.card summary { cursor: pointer; font-size: 0.95rem; font-weight: 700; color: var(--accent); }
+.card details[open] summary { margin-bottom: 0.6rem; }
+.card details div { display: grid; gap: 0.6rem; font-size: 0.97rem; }
+.card details h4 { margin: 0.3rem 0 0; font-size: 1rem; font-weight: 700; }
+.card details ul { margin: 0; padding-left: 1.2rem; }
+.empty { color: var(--muted); font-style: italic; }
+
+/* ---------- Skills ---------- */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 2rem 2.5rem; }
+.skills h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.3rem; margin-bottom: 0.4rem; }
+.skills ul { list-style: none; margin: 0; padding: 0; }
+.skills li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.32rem; border-bottom: 1px dashed var(--rule); }
+.skills .level { font-size: 0.8rem; letter-spacing: 0.15em; color: var(--title); align-self: center; white-space: nowrap; }
+.skills-key { margin: 0 0 1.5rem; font-size: var(--step--1); color: var(--muted); }
+.skills-key span { color: var(--title); letter-spacing: 0.15em; }
+
+/* ---------- Experience: entries like calendar events ---------- */
+.jobs { display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+.job { --stripe: var(--s1); display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 1.25rem; }
+.jobs .job:nth-child(5n+2) { --stripe: var(--s3); }
+.jobs .job:nth-child(5n+3) { --stripe: var(--s6); }
+.jobs .job:nth-child(5n+4) { --stripe: var(--s5); }
+.jobs .job:nth-child(5n+5) { --stripe: var(--s7); }
+.job-when { font-family: var(--font-body); font-size: var(--step--1); color: var(--muted); padding-top: 0.6rem; margin: 0; }
+.job-when span { display: block; }
+.job-body {
+  display: grid; gap: 0.45rem; min-width: 0;
+  background: var(--card);
+  border-left: 8px solid var(--stripe);
+  border-radius: 14px;
+  padding: 0.8rem 1.1rem 1rem;
+}
+.job-body h3 { font-size: 1.15rem; font-weight: 700; }
+.job-org { color: var(--muted); margin: 0; }
+.job ul { margin: 0.2rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.4rem; max-width: 44rem; }
+.job p { margin: 0; max-width: 44rem; }
+
+.degrees { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+.degrees li { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 1.25rem; }
+.degrees li > span:first-child { font-family: var(--font-body); font-size: var(--step--1); color: var(--muted); padding-top: 0.2rem; }
+.subhead { margin: 2rem 0 0.9rem; font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; }
+
+footer { padding-block: 2rem 3rem; font-size: var(--step--1); color: var(--muted); }
+footer p { margin: 0; max-width: 44rem; }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .construction { order: -1; }
+  .construction svg { max-width: 280px; }
+  .notes { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .job, .degrees li { grid-template-columns: 1fr; gap: 0.3rem; }
+  .topbar { position: static; }
+  .topbar .wrap { justify-content: flex-start; }
+  .topbar .wrap { padding-bottom: 0.75rem; }
+  .topbar nav { width: 100%; }
+  /* On phones the tabs become a grid of tiles, like the dashboard's phone view */
+  .tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.4rem; }
+  .tabs li { grid-column: span 2; }
+  .tabs li:nth-child(n+4) { grid-column: span 3; }
+  .tabs a { padding: 0.45rem 0.3rem 0.35rem; font-size: 0.9rem; text-align: center; border-radius: 10px; }
+}

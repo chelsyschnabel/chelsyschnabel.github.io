@@ -4,227 +4,92 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chelsy Schnabel Portfolio</title>
-<meta content="cover">
 <meta name="description" content="Portfolio of Chelsy Schnabel, curriculum developer and instructional designer: math, computer science, and AI literacy curriculum work samples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=Short+Stack&family=Ubuntu+Sans+Mono:wght@400;500&display=swap">
-<style>
-/* Layout: one reading column like a well-kept notebook; work samples set as library catalog cards in a two-up grid. */
-:root {
-  --paper: #eff1f5;      /* Latte base: page */
-  --card: #f6f7fa;       /* cards, a step lighter than base */
-  --ink: #4c4f69;        /* Latte text */
-  --muted: #5c5f77;      /* Latte subtext1 */
-  --rule: #bcc0cc;       /* Latte surface1 */
-  --accent: #8839ef;    /* Latte mauve: links, focus, Expert */
-  --accent-2: #8839ef;      /* corner labels (Latte lavender is too light for text) */
-  --chip: #ccd0da;       /* Latte surface0 */
-  --font-display: "Short Stack", "Comic Neue", "Atkinson Hyperlegible Next", system-ui, sans-serif;
-  --font-mono: "Ubuntu Sans Mono", "Ubuntu Mono", ui-monospace, "DejaVu Sans Mono", monospace;
-  --font-body: "Atkinson Hyperlegible Next", system-ui, "DejaVu Sans", Arial, sans-serif;
-  --step--1: 0.84rem;
-  --step-0: 1.0625rem;
-  --step-1: 1.3rem;
-  --step-2: 1.7rem;
-  --step-3: clamp(2.3rem, 6vw, 3.4rem);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #1e1e2e; --card: #181825; --ink: #cdd6f4; --muted: #a6adc8;
-    --rule: #45475a; --accent: #cba6f7; --accent-2: #b4befe; --chip: #313244;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-    --paper: #1e1e2e; --card: #181825; --ink: #cdd6f4; --muted: #a6adc8;
-    --rule: #45475a; --accent: #cba6f7; --accent-2: #b4befe; --chip: #313244;
-  color-scheme: dark;
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: var(--step-0);
-  line-height: 1.6;
-}
-img { max-width: 100%; height: auto; }
-[hidden] { display: none !important; }
-a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: -999px; top: 0; }
-.skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); top: 8px; background: var(--card); padding: 0.4rem 0.8rem; z-index: 5; }
-
-.wrap {
-  max-width: 62rem;
-  margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-
-h1, h2, h3 { text-wrap: balance; font-weight: 400; line-height: 1.15; margin: 0; }
-h1 { font-family: var(--font-display); font-size: var(--step-3); }
-h2 { font-family: var(--font-display); font-size: var(--step-2); }
-h3 { font-family: var(--font-body); font-size: var(--step-1); font-weight: 600; }
-
-.label {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* Masthead */
-.masthead { padding-block: clamp(2rem, 6vw, 4rem) 2rem; border-bottom: 1px solid var(--rule); }
-.masthead-grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.25rem, 4vw, 2.5rem); align-items: center; }
-.portrait {
-  width: clamp(110px, 22vw, 168px);
-  aspect-ratio: 1;
-  max-width: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--rule);
-  box-shadow: 0 0 0 6px var(--card), 0 0 0 7px var(--rule);
-}
-.masthead-text { min-width: 0; display: grid; gap: 0.6rem; }
-.role { font-style: italic; color: var(--muted); font-size: var(--step-1); margin: 0; }
-.contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0.4rem 0 0; padding: 0; list-style: none; font-size: var(--step--1); font-family: var(--font-mono); }
-.contact li { min-width: 0; overflow-wrap: anywhere; }
-.contact span { color: var(--muted); margin-right: 0.35rem; }
-
-/* Sections */
-main section { padding-block: 2.5rem; border-bottom: 1px solid var(--rule); }
-main section:last-of-type { border-bottom: 0; }
-.section-head { display: grid; gap: 0.35rem; margin-bottom: 1.5rem; }
-.prose { max-width: 40rem; margin: 0; }
-
-.about-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem; }
-.facts { display: grid; gap: 1.1rem; align-content: start; margin: 0; }
-.facts dt { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.facts dd { margin: 0.15rem 0 0; }
-
-/* Work samples: catalog cards */
-.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; padding: 0; list-style: none; }
-.filters button {
-  font: inherit; font-family: var(--font-mono); font-size: var(--step--1);
-  background: transparent; color: var(--ink);
-  border: 1px solid var(--rule); border-radius: 999px;
-  padding: 0.3rem 0.85rem; cursor: pointer;
-}
-.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.filters button:hover { border-color: var(--ink); }
-
-.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
-.card {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 1.25rem 1.35rem 1.35rem;
-  display: grid; gap: 0.7rem; align-content: start;
-  min-width: 0;
-  position: relative;
-  /* the punched hole of a catalog card */
-  background-image: radial-gradient(circle at 50% calc(100% - 0.9rem), var(--paper) 0 0.32rem, transparent 0.34rem);
-  padding-bottom: 2.2rem;
-}
-.card-top { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
-.callno { font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent-2); white-space: nowrap; }
-.card p { margin: 0; }
-.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
-.tags li { font-family: var(--font-mono); font-size: 0.75rem; background: var(--chip); color: var(--ink); padding: 0.1rem 0.5rem; border-radius: 3px; }
-.tools { font-size: var(--step--1); color: var(--muted); }
-.card-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: var(--step--1); font-family: var(--font-mono); }
-.card details { border-top: 1px dashed var(--rule); padding-top: 0.6rem; }
-.card summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent); }
-.card details[open] summary { margin-bottom: 0.6rem; }
-.card details div { display: grid; gap: 0.6rem; font-size: 0.97rem; }
-.card details h4 { margin: 0.3rem 0 0; font-size: 1rem; font-weight: 600; }
-.card details ul { margin: 0; padding-left: 1.2rem; }
-.empty { color: var(--muted); font-style: italic; }
-
-/* Skills */
-.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.75rem 2.5rem; }
-.skills h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-1); margin-bottom: 0.6rem; }
-.skills ul { list-style: none; margin: 0; padding: 0; }
-.skills li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.32rem; border-bottom: 1px dotted var(--rule); }
-.skills li span:last-child { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); align-self: center; }
-.skills li.expert span:last-child { color: var(--accent); }
-
-/* Experience: a timeline down the margin */
-.jobs { display: grid; gap: 2rem; margin: 0; padding: 0; list-style: none; }
-.job { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem; }
-.job-when { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 0.25rem; }
-.job-when span { display: block; }
-.job-body { display: grid; gap: 0.45rem; min-width: 0; }
-.job-org { font-style: italic; color: var(--muted); margin: 0; }
-.job ul { margin: 0.2rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.4rem; max-width: 44rem; }
-.job p { margin: 0; max-width: 44rem; }
-
-.degrees { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
-.degrees li { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem; }
-.degrees li > span:first-child { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 0.2rem; }
-
-footer { padding-block: 2rem 3rem; border-top: 1px solid var(--rule); font-size: var(--step--1); color: var(--muted); }
-footer p { margin: 0; }
-
-@media (max-width: 720px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .cards { grid-template-columns: 1fr; }
-  .job, .degrees li { grid-template-columns: 1fr; gap: 0.3rem; }
-}
-@media (max-width: 460px) {
-  .masthead-grid { grid-template-columns: 1fr; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .card { transition: border-color 0.15s ease; }
-  .card:hover { border-color: var(--muted); }
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=Architects+Daughter&display=swap">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="masthead">
-  <div class="wrap masthead-grid">
-    <img class="portrait" src="assets/headshot.jpg" alt="Portrait of Chelsy Schnabel" width="168" height="168">
-    <div class="masthead-text">
-      <h1>Chelsy Schnabel</h1>
-      <p class="role">Curriculum developer and instructional designer</p>
-      <ul class="contact">
-        <li><span>Email</span><a href="mailto:chelsy.schnabel@gmail.com">chelsy.schnabel@gmail.com</a></li>
-        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/chelsy-schnabel/">in/chelsy-schnabel</a></li>
-        <li><span>GitHub</span><a href="https://github.com/chelsyschnabel">chelsyschnabel</a></li>
-        <li><span>Based in</span>Clinton, Indiana, USA</li>
+<header class="topbar">
+  <div class="wrap">
+    <a class="name" href="#top">Chelsy Schnabel</a>
+    <nav aria-label="Sections">
+      <ul class="tabs">
+        <li><a class="t1" href="#about">About</a></li>
+        <li><a class="t2" href="#work">Work</a></li>
+        <li><a class="t3" href="#skills">Skills</a></li>
+        <li><a class="t4" href="#experience">Experience</a></li>
+        <li><a class="t5" href="#education">Education</a></li>
       </ul>
-    </div>
+    </nav>
   </div>
 </header>
 
 <main id="main">
-  <section id="about" aria-labelledby="about-h">
-    <div class="wrap about-grid">
-      <div>
-        <div class="section-head"><p class="label">About</p><h2 id="about-h">About me</h2></div>
-        <p class="prose">Curriculum and instructional design leader with 10+ years designing technology-enabled educational programs across higher education and K-12 settings. Deep background in math instruction, computer science and programming instruction, educator professional development, and standards-aligned curriculum design, with recent work authoring an openly licensed AI-literacy curriculum spanning elementary through undergraduate. All but dissertation for doctorate in Curriculum and Instruction, committed to evidence-based, inclusive pedagogy and to expanding access for learners traditionally underrepresented in computing.</p>
+  <div class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1>Chelsy Schnabel</h1>
+        <p class="role">Curriculum developer and instructional designer</p>
+        <ul class="contact">
+          <li><span>Email</span><a href="mailto:chelsy.schnabel@gmail.com">chelsy.schnabel@gmail.com</a></li>
+          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/chelsy-schnabel/">in/chelsy-schnabel</a></li>
+          <li><span>GitHub</span><a href="https://github.com/chelsyschnabel">chelsyschnabel</a></li>
+          <li><span>Based in</span>Clinton, Indiana · open to remote roles</li>
+        </ul>
       </div>
-      <dl class="facts">
-        <div><dt>Interests</dt><dd>Games, education research, crochet</dd></div>
-        <div><dt>Languages</dt><dd>English</dd></div>
-      </dl>
+      <figure class="construction">
+        <svg viewBox="64 50 232 212" role="img" aria-labelledby="construction-title">
+          <title id="construction-title">Portrait of Chelsy Schnabel, placed at point C of Euclid's construction of an equilateral triangle</title>
+          <defs>
+            <clipPath id="photo-clip"><circle cx="180" cy="108.8" r="50"/></clipPath>
+          </defs>
+          <path class="arc draw" d="M 245.2 193.8 A 140 140 0 0 0 73.8 94.8"/>
+          <path class="arc draw" d="M 286.2 94.8 A 140 140 0 0 0 114.8 193.8"/>
+          <path class="seg draw late" d="M 110 230 L 250 230"/>
+          <path class="seg draw late" d="M 110 230 L 153 155.6"/>
+          <path class="seg draw late" d="M 250 230 L 207 155.6"/>
+          <image href="assets/headshot.jpg" x="130" y="58.8" width="100" height="100" clip-path="url(#photo-clip)" preserveAspectRatio="xMidYMid slice"/>
+          <circle class="ring" cx="180" cy="108.8" r="50"/>
+          <circle class="dot" cx="110" cy="230" r="4"/>
+          <circle class="dot" cx="250" cy="230" r="4"/>
+          <text x="92" y="254">A</text>
+          <text x="256" y="254">B</text>
+          <text x="232" y="64">C</text>
+        </svg>
+        <figcaption>Euclid, <i>Elements</i> I.1. C is for Chelsy.</figcaption>
+      </figure>
+    </div>
+    <div class="wrap">
+      <h2 class="sr-only">What I'm working on now</h2>
+      <ul class="notes">
+        <li class="note n1"><span class="note-title">High Low</span><span class="note-sub">Probability lesson · In progress</span></li>
+        <li class="note n2"><span class="note-title">NCTM 2027</span><span class="note-sub">Session proposal · Submitted</span></li>
+        <li class="note n3"><span class="note-title">W3C</span><span class="note-sub">Accessibility · In progress</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="about" class="folder c1" aria-labelledby="about-h">
+    <div class="wrap">
+      <h2 class="tab" id="about-h">About me</h2>
+      <div class="panel about-grid">
+        <p class="prose">Curriculum and instructional design leader with 10+ years designing technology-enabled educational programs across higher education and K-12 settings. Deep background in math instruction, computer science and programming instruction, educator professional development, and standards-aligned curriculum design, with recent work authoring an openly licensed AI-literacy curriculum spanning elementary through undergraduate. ABD doctoral candidate in Curriculum and Instruction, committed to evidence-based, inclusive pedagogy and to expanding access for learners traditionally underrepresented in computing.</p>
+        <dl class="facts">
+          <div><dt>Interests</dt><dd>Games, education research, crochet</dd></div>
+          <div><dt>Languages</dt><dd>English</dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
-  <section id="work" aria-labelledby="work-h">
+  <section id="work" class="folder c2" aria-labelledby="work-h">
     <div class="wrap">
-      <div class="section-head"><p class="label">Work samples</p><h2 id="work-h">Work samples</h2></div>
+      <h2 class="tab" id="work-h">Work samples</h2>
+      <div class="panel">
       <ul class="filters" aria-label="Filter work samples by level">
         <li><button type="button" id="f-all" data-filter="all" aria-pressed="true">All</button></li>
         <li><button type="button" id="f-k5" data-filter="k5" aria-pressed="false">K-5</button></li>
@@ -238,9 +103,9 @@ footer p { margin: 0; }
       <ul class="cards" id="cards">
         <li class="card" data-levels="ug">
           <div class="card-top"><h3>AI Literacy Canvas Course</h3><span class="callno">Canvas</span></div>
-          <p>A short, start-anytime course for college students in any major. The goal is for learners to use AI as a learning partner: choosing tools on purpose, prompting for feedback instead of answers, verifying output, and documenting their AI use. Content is adapted from my openly licensed AI literacy curriculum.</p>
-          <p class="tools">Tools: Canvaslite for course implementation and facilitation, Figma for course banner, course card image, and module graphics.</p>
-          <ul class="tags"><li>Undergraduate curriculum</li></ul>
+          <p>A short, start-anytime course for college students in any major. Learners use AI as a learning partner: choosing tools on purpose, prompting for feedback instead of answers, verifying output, and documenting their AI use. Content is adapted from my openly licensed AI literacy curriculum.</p>
+          <p class="tools">Tools: Canvas Lite for course implementation and facilitation, and Figma for the course banner, course card image, and module graphics.</p>
+          <ul class="tags"><li>Undergraduate</li></ul>
           <div class="card-links"><a href="https://canvaslite.instructure.com/courses/24107">Open the course</a></div>
         </li>
 
@@ -254,7 +119,7 @@ footer p { margin: 0; }
 
         <li class="card" data-levels="68 912 ug">
           <div class="card-top"><h3>High Low</h3><span class="callno">GitHub · Scratch</span></div>
-          <p>A card game that can be used for several kinds of instruction, including teaching probability in mathematics or loops, conditions, and functions in programming. Versions are provided for programming (Python or R) and for probability. I used the probability version in my college Quantitative Reasoning course's probability unit.</p>
+          <p>A card game for teaching probability in mathematics or loops, conditions, and functions in programming. Versions are provided for programming (Python or R) and for probability. I used the probability version in my college Quantitative Reasoning course's probability unit.</p>
           <p class="tools">Tools: GitHub, RStudio, Python 3.12 and IDLE, Microsoft Word for the probability versions and card decks, Scratch for the online version, and Figma for the cover image and Scratch character artwork.</p>
           <ul class="tags"><li>6-8</li><li>9-12</li><li>Undergraduate</li></ul>
           <div class="card-links">
@@ -266,7 +131,7 @@ footer p { margin: 0; }
             <summary>Teacher files and remote options</summary>
             <div>
               <h4>Teacher edition: probability</h4>
-              <p>A teacher edition for teaching this lesson as a probability lesson, with scorecards for students to compute the probability of each turn. It's the same file provided in the repository's probability folder.</p>
+              <p>A teacher edition for teaching this lesson as a probability lesson, with scorecards for students to compute the probability of each turn.</p>
               <p><a href="files/High_Low_Instructions.docx">High Low Instructions (.docx)</a></p>
               <h4>Card files</h4>
               <ul>
@@ -274,8 +139,8 @@ footer p { margin: 0; }
                 <li><a href="files/High_Low_big_demo_cards.docx">Teacher demonstration deck (.docx)</a>: print twice, and add magnets to the back if you have a magnetic board.</li>
               </ul>
               <h4>Teaching remotely</h4>
-              <p>A live session works best, so students can interact with one another. The facilitator guide for the High Low Live Workshop in the repository has suggestions for running it. It's based on the R version but adapts to the probability and Python versions. For an online way to play, the Scratch version gives students another way to think about conditions and loops.</p>
-              <p class="tools">Updated October 26, 2026: probability version and card files added, a new Python version, and the repository reorganized by version. The project moved from Posit Cloud to GitHub for easier access.</p>
+              <p>A live session works best, so students can interact with one another. The facilitator guide in the repository has suggestions for running it. For an online way to play, the Scratch version gives students another way to think about conditions and loops.</p>
+              <p class="tools">Updated October 26, 2026: probability version and card files added, a new Python version, and the project moved from Posit Cloud to GitHub.</p>
             </div>
           </details>
         </li>
@@ -289,7 +154,7 @@ footer p { margin: 0; }
 
         <li class="card" data-levels="68 ug">
           <div class="card-top"><h3>Escape Unit 1!</h3><span class="callno">Desmos</span></div>
-          <p>Designed for Indiana State University's Algebra course, so students could review and show their understanding of Unit 1 concepts before their first exam. The concepts are generally covered in grades 6-8. The lesson uses some screens created in other Desmos Classroom lessons by other instructors and by the Desmos team.</p>
+          <p>Designed for Indiana State University's Algebra course, so students could review and show their understanding of Unit 1 concepts before their first exam. The concepts are generally covered in grades 6-8. Some screens come from other Desmos Classroom lessons by other instructors and the Desmos team.</p>
           <p class="tools">Tools: Desmos Classroom and Canva.</p>
           <ul class="tags"><li>6-8</li><li>Undergraduate</li></ul>
           <div class="card-links"><a href="https://classroom.amplify.com/activity/63a0cce8935e88222ac29908">Open the activity</a></div>
@@ -297,51 +162,61 @@ footer p { margin: 0; }
 
         <li class="card" data-levels="912 ug grad">
           <div class="card-top"><h3>Starter Constructions Part 1</h3><span class="callno">GeoGebra</span></div>
-          <p>A GeoGebra lesson built for an advanced geometry course as practice of constructions students had learned before. Students recreate compass-and-straightedge constructions in GeoGebra. These constructions are taught in college geometry and some high school geometry courses, so the lesson can be adapted for either.</p>
+          <p>A GeoGebra lesson built for an advanced geometry course as practice of constructions students had learned before. Students recreate compass-and-straightedge constructions in GeoGebra. It can be adapted for college or high school geometry.</p>
           <p class="tools">Tools: GeoGebra, Figma, a screen recorder, and YouTube.</p>
           <ul class="tags"><li>9-12</li><li>Undergraduate</li><li>Graduate</li></ul>
           <div class="card-links">
             <a href="https://www.geogebra.org/m/jjgrdpyw">Open the lesson</a>
-            <a href="https://www.geogebra.org/m/p7edmu9u">Textbook section: Exponential Functions and Applications</a>
+            <a href="https://www.geogebra.org/m/p7edmu9u">Textbook section: Exponential Functions</a>
           </div>
         </li>
 
         <li class="card" data-levels="68 912 ug">
           <div class="card-top"><h3>Solutions of Systems Multi-Choice Game</h3><span class="callno">Blooket</span></div>
           <p>A Blooket quiz for students to practice their understanding of solutions to systems of linear equations. Problems are still in development, and some questions are saved to the quiz now.</p>
-          <p class="tools">Tools: Blooket, a <a href="https://www.desmos.com/calculator/lcaxt4qflq">Desmos graph</a>, and Figma.</p>
+          <p class="tools">Tools: Blooket, a Desmos graph, and Figma.</p>
           <ul class="tags"><li>6-8</li><li>9-12</li><li>Undergraduate</li></ul>
-          <div class="card-links"><a href="https://dashboard.blooket.com/set/688260a1a6da584fbe0c5384">Open the quiz</a></div>
+          <div class="card-links">
+            <a href="https://dashboard.blooket.com/set/688260a1a6da584fbe0c5384">Open the quiz</a>
+            <a href="https://www.desmos.com/calculator/lcaxt4qflq">Desmos graph</a>
+          </div>
         </li>
 
         <li class="card" data-levels="k5">
           <div class="card-top"><h3>Polygon Sort</h3><span class="callno">Polypad</span></div>
-          <p>A Polypad activity based on <a href="https://accessim.org/k-5/grade-2/unit-6/section-a/lesson-1/preparation?a=teacher">Illustrative Mathematics Grade 2, Unit 6, Lesson 1</a>. Students drag the shapes into their correct drop zones, which check answers automatically as students work.</p>
-          <p>I recommend the teacher project this manipulative to lead conversations while students work with the physical cards, since clicking and dragging can be hard for this age group on some devices.</p>
-          <p class="tools">Tools: Polypad.</p>
+          <p>A Polypad activity based on Illustrative Mathematics Grade 2, Unit 6, Lesson 1. Students drag shapes into drop zones that check answers automatically.</p>
+          <p>I recommend projecting this manipulative to lead conversations while students work with physical cards, since clicking and dragging can be hard for this age group on some devices.</p>
           <ul class="tags"><li>K-5</li></ul>
-          <div class="card-links"><a href="https://polypad.amplify.com/p/DsGapyjVJM8wQ">Open the activity</a></div>
+          <div class="card-links">
+            <a href="https://polypad.amplify.com/p/DsGapyjVJM8wQ">Open the activity</a>
+            <a href="https://accessim.org/k-5/grade-2/unit-6/section-a/lesson-1/preparation?a=teacher">IM Grade 2 lesson</a>
+          </div>
         </li>
       </ul>
+      </div>
     </div>
   </section>
 
-  <section id="skills" aria-labelledby="skills-h">
+  <section id="skills" class="folder c3" aria-labelledby="skills-h">
     <div class="wrap">
-      <div class="section-head"><p class="label">Skills</p><h2 id="skills-h">Skills and tools</h2></div>
+      <h2 class="tab" id="skills-h">Skills and tools</h2>
+      <div class="panel">
+      <p class="skills-key"><span aria-hidden="true">●●●</span> Expert · <span aria-hidden="true">●●○</span> Intermediate · <span aria-hidden="true">●○○</span> Beginner</p>
       <div class="skills" id="skills-list"></div>
+      </div>
     </div>
   </section>
 
-  <section id="experience" aria-labelledby="exp-h">
+  <section id="experience" class="folder c4" aria-labelledby="exp-h">
     <div class="wrap">
-      <div class="section-head"><p class="label">Experience</p><h2 id="exp-h">Experience</h2></div>
+      <h2 class="tab" id="exp-h">Experience</h2>
+      <div class="panel">
       <ol class="jobs">
         <li class="job">
           <p class="job-when"><span>Aug 2025 to present</span><span>Remote, USA</span></p>
           <div class="job-body">
             <h3>Independent Content Creator &amp; Digital Producer</h3>
-            <p class="job-org">Self-Employed</p>
+            <p class="job-org">Self-employed</p>
             <ul>
               <li>Designed and produced instructional and narrative video content end-to-end using DaVinci Resolve and OBS Studio, from scripting through editing to publishing, building a repeatable content production workflow</li>
               <li>Created visual assets and branded materials in Figma and Canva to support content and audience communication, applying design skills directly transferable to instructional material development</li>
@@ -417,76 +292,33 @@ footer p { margin: 0; }
           </div>
         </li>
       </ol>
+      </div>
     </div>
   </section>
 
-  <section id="education" aria-labelledby="edu-h">
+  <section id="education" class="folder c5" aria-labelledby="edu-h">
     <div class="wrap">
-      <div class="section-head"><p class="label">Education</p><h2 id="edu-h">Education</h2></div>
+      <h2 class="tab" id="edu-h">Education</h2>
+      <div class="panel">
       <ul class="degrees">
         <li><span>2019 to present</span><span><strong>Ph.D. candidate (ABD), Curriculum and Instruction: Mathematics Education</strong>, Indiana State University</span></li>
         <li><span>2015 to 2017</span><span><strong>M.S., Computer Science</strong>, Indiana State University</span></li>
         <li><span>2009 to 2013</span><span><strong>B.S., Mathematics and Mathematics Education</strong>, Indiana State University</span></li>
       </ul>
+      <h3 class="subhead">Certifications and memberships</h3>
+      <ul class="degrees">
+        <li><span>2026</span><span><strong>AI Fluency: Framework &amp; Foundations</strong> and <strong>AI Fluency for Educators</strong>, Anthropic Academy</span></li>
+        <li><span>2026</span><span><strong>Founding Member</strong>, National Association of Curriculum Developers (NACD)</span></li>
+      </ul>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><p>All work samples are my own unless noted. Built in plain HTML and CSS and deployed via GitHub.</p></div>
+  <div class="wrap"><p>All work samples are my own unless noted. Headings are set in Architects Daughter and text in Atkinson Hyperlegible Next, a typeface designed for readers with low vision. Built by hand in HTML and CSS and hosted on GitHub Pages.</p></div>
 </footer>
 
-<script>
-(function () {
-  // Skills, grouped by type and listed strongest first.
-  var levelRank = { Expert: 0, Intermediate: 1, Beginner: 2 };
-  var groups = [
-    ["Instructional and curriculum tools", [["Canvas","Expert"],["Desmos Classroom","Expert"],["GeoGebra","Expert"],["LaTeX / MathType","Expert"],["Desmos Calculators","Intermediate"],["Blackboard Learn","Intermediate"],["Nearpod","Intermediate"],["EdPuzzle","Intermediate"],["Quality Matters","Intermediate"],["Turnitin","Beginner"]]],
-    ["Content and media production", [["Canva","Expert"],["DaVinci Resolve","Expert"],["OBS Studio","Expert"],["Meld Studio","Expert"],["Figma","Intermediate"],["Camtasia","Intermediate"],["Adobe Creative Cloud","Beginner"]]],
-    ["Collaboration and project management", [["Google Workspace","Expert"],["Microsoft Office 365","Expert"],["Notion","Intermediate"],["Jira","Intermediate"],["Slack","Intermediate"],["Zoom","Intermediate"],["Google Meet","Intermediate"]]],
-    ["Programming and development", [["R","Intermediate"],["Python","Intermediate"],["HTML / CSS","Intermediate"],["Node.js","Beginner"],["Webhook integrations","Beginner"],["Pipedream","Beginner"],["Google Apps Script","Beginner"]]],
-    ["Content creation and community", [["Discord","Expert"],["Fluxer","Expert"],["Twitch","Expert"],["Elgato Stream Deck","Expert"],["Stoat","Intermediate"],["YouTube","Intermediate"],["TikTok","Intermediate"],["Instagram","Intermediate"],["X","Intermediate"],["Bluesky","Intermediate"],["Kick","Intermediate"],["StreamElements","Intermediate"],["Streamer.bot","Intermediate"],["Matrix","Beginner"],["Stream alert integrations","Beginner"]]]
-  ];
-  var host = document.getElementById("skills-list");
-  groups.forEach(function (g) {
-    var box = document.createElement("div");
-    var h = document.createElement("h3"); h.textContent = g[0]; box.appendChild(h);
-    var ul = document.createElement("ul");
-    g[1].slice().sort(function (a, b) { return levelRank[a[1]] - levelRank[b[1]]; }).forEach(function (s) {
-      var li = document.createElement("li");
-      if (s[1] === "Expert") li.className = "expert";
-      var n = document.createElement("span"); n.textContent = s[0];
-      var l = document.createElement("span"); l.textContent = s[1];
-      li.appendChild(n); li.appendChild(l); ul.appendChild(li);
-    });
-    box.appendChild(ul); host.appendChild(box);
-  });
-
-  // Work sample filter by level.
-  var buttons = document.querySelectorAll(".filters button");
-  var cards = document.querySelectorAll("#cards .card");
-  var none = document.getElementById("no-match");
-  function apply(f) {
-    var shown = 0;
-    cards.forEach(function (c) {
-      var ok = f === "all" || c.getAttribute("data-levels").split(" ").indexOf(f) !== -1;
-      c.hidden = !ok; if (ok) shown++;
-    });
-    none.hidden = shown !== 0;
-    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-filter") === f)); });
-  }
-  buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-filter")); }); });
-    // Open links to other sites in a new tab, and tell screen reader users it will.
-  document.querySelectorAll('a[href^="http"], a[href$=".pdf"]').forEach(function (a) {
-    // if (a.hostname === location.hostname) return;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    var note = document.createElement("span");
-    note.className = "sr-only";
-    note.textContent = " (opens in a new tab)";
-    a.appendChild(note);
-  });
-})();
-</script>
+<script src="script.js"></script>
 </body>
 </html>

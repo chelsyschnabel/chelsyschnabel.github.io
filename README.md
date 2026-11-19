@@ -1,11 +1,11 @@
 # Chelsy Schnabel Portfolio
 
-My portfolio site, in plain HTML and CSS with no build step. Edit `index.html` in any text editor and the change goes live on the next push.
+My portfolio site, in plain HTML, CSS, and JavaScript with no build step. Edit the files in any text editor and the change goes live on the next push.
 
 ## Publish on GitHub Pages
 
 1. On GitHub, create a new **public** repository named `chelsyschnabel.github.io`. Using that exact name makes the site live at https://chelsyschnabel.github.io.
-2. Upload everything in this folder (`index.html`, `README.md`, `assets/`, `files/`), either with "Add file > Upload files" on the repo page or with git:
+2. Upload everything in this folder (`index.html`, `style.css`, `script.js`, `README.md`, `assets/`, `files/`), either with "Add file > Upload files" on the repo page or with git:
 
    ```
    git init
@@ -21,7 +21,9 @@ My portfolio site, in plain HTML and CSS with no build step. Edit `index.html` i
 
 ## What's where
 
-- `index.html`: the whole site. Work samples are the cards under "Work samples." Skills are listed in the script near the bottom of the file.
+- `index.html`: the page content. Work samples are the cards under "Work samples."
+- `style.css`: colors, fonts, and layout. The color palette and the two fonts are at the top.
+- `script.js`: the skills list (edit tools and levels there), the level filter, and the new-tab links.
 - `assets/headshot.jpg`: the portrait.
 - `files/`: downloadable files (High Low teacher edition and card decks, and the MATH 252 course plan).
 
